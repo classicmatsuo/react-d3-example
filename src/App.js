@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     temps: {},
     city: 'sf', // city whose temperatures to show
+    range: [] // time range set by the brush
   };
 
   componentDidMount() {
@@ -28,6 +29,10 @@ class App extends Component {
 
   updateCity = (e) => {
     this.setState({city: e.target.value});
+  }
+
+  updateRange = range => {
+    this.setState({ range });
   }
 
   render() {
@@ -54,10 +59,20 @@ class App extends Component {
           but just to show the possibility of using D3 and React*
         </p>
         <LineChart data={data} />
-        <BarChart data={data} />
+        <BarChart 
+          data={data} 
+          range={this.state.range}
+        />
         <br />
-        <Chart data={data} />
-        <RadialChart data={data} />
+        <Chart 
+          data={data} 
+          range={this.state.range}
+          updateRange={this.updateRange}
+        />
+        <RadialChart 
+          data={data} 
+          range={this.state.range}
+        />
 
         <p>
           (Weather data from <a href='wunderground.com' target='_new'>wunderground.com</a>)

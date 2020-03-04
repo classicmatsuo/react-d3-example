@@ -21,7 +21,7 @@ class RadialChart extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (!nextProps.data) return null; // data hasn't been loaded yet so do nothing
-    const {data} = nextProps;
+    const {data, range} = nextProps;
     const {radiusScale, colorScale, arcGenerator} = prevState;
 
     // data has changed, so recalculate scale domains
@@ -39,8 +39,10 @@ class RadialChart extends Component {
         innerRadius: radiusScale(d.low),
         outerRadius: radiusScale(d.high),
       });
+      const isColored =
+        !range.length || (range[0] <= d.date && d.date <= range[1]);
 
-      return {path, fill: colors(colorScale(d.avg))};
+      return {path, fill: isColored ? colors(colorScale(d.avg)) : "#ccc"};
     });
 
     const tempAnnotations = [5, 20, 40, 60, 80].map(temp => {
