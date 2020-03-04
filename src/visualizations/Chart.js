@@ -55,7 +55,7 @@ class Chart extends Component {
   componentDidUpdate() {
     this.xAxis.scale(this.state.xScale);
     d3.select(this.refs.xAxis).call(this.xAxis);
-    this.yAxis.scale(this.state.xScale);
+    this.yAxis.scale(this.state.yScale);
     d3.select(this.refs.yAxis).call(this.yAxis);
   }
 
